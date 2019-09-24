@@ -1,0 +1,57 @@
+@media screen {
+
+    html, body { min-height: 100%; }
+    body { margin: 0; background: #ffffff; line-height: 1.4; overflow: hidden; }
+
+    .flex-wrapper { display: flex; flex-wrap: wrap; }
+    #page-wrap { width: 100%; height: 100vh; overflow: hidden; }
+
+    /*** canvas ***/
+
+    #canvas { height: 100vh; width: 100vw; opacity: 0; transition: opacity 0.5s ease-in; }
+    .video-started #canvas { opacity: 1; }
+    .curtain-wrapper {
+        position: absolute; z-index: 15; top: 10%; right: 10%; bottom: 10%; left: 10%;
+    }
+    .curtain { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+    .curtain img, .curtain video { display: none; }
+
+
+    /*** handling errors ***/
+
+    .no-curtains .curtain-wrapper {
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .no-curtains .curtain {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .no-curtains.video-started .curtain img, .no-curtains.video-started .curtain video {
+        display: block;
+        object-fit: cover;
+    }
+
+}
+
+/*** handling video ratio on error ***/
+
+@media screen and (max-aspect-ratio: 1920/1080) {
+    .no-curtains .curtain-wrapper {
+        height: calc(100vh * 0.8);
+        width: calc(177vh * 0.8);
+    }
+}
+@media screen and (min-aspect-ratio: 1920/1080) {
+    .no-curtains .curtain-wrapper {
+        width: calc(100vw * 0.8);
+        height: calc(56.25vw * 0.8);
+    }
+}

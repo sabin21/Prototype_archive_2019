@@ -1,5 +1,9 @@
 
+$color-text-base: #999;
+$color-display-base: #000;
+
 // Common Mixin ----------------------
+
 @mixin back-center-cover{
     background-position: center center;
     background-size: cover;

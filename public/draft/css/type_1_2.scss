@@ -2,9 +2,9 @@
 
 @import url("../../fonts/poppins/stylesheet.css");
 
-@import "../../css/globals/_reset.scss";
-@import "../../css/bootstrap-grid.scss";
-@import "../../css/patterns/_cards_1_1.scss";
+@import "../../libs/scss/globals/_reset.scss";
+@import "../../libs/scss/bootstrap-grid.scss";
+@import "../../libs/scss/patterns/_cards_1_1.scss";
 @import "./drafts_common.scss";
 @import "./webgl_drag_slider.scss";
 

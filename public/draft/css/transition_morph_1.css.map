@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAEA,OAAO,CAAC,yCAAI",
+    "sources": [
+        "transition_morph_1.scss"
+    ],
+    "names": [],
+    "file": "transition_morph_1.css"
+}

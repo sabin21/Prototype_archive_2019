@@ -1,0 +1,210 @@
+@charset "utf-8";
+
+@import url("../../fonts/poppins/stylesheet.css");
+
+@import "../../css/globals/_reset.scss";
+@import "../../css/bootstrap-grid.scss";
+@import "../../css/patterns/_cards_1_1.scss";
+@import "./drafts_common.scss";
+@import "./webgl_drag_slider.scss";
+
+body { font-family: "poppins"; overflow-x: hidden; }
+
+//--------------------------------------
+
+.cards-grid-wrap{
+    width: 100vw; display:flex; flex-wrap:wrap; 
+    justify-content:space-evenly;
+
+    &.ratio-4x4{
+        .card {
+            height: calc(100vw / 4 - 5px); 
+        }
+    }
+    .card {
+        position: relative;
+        width:calc(100vw / 4 - 5px); background-color:transparent;
+        @include back-center-cover; margin-top: 3px;
+        overflow: hidden;
+        .back-pict {
+            position: absolute; width: 100%; height: 100%; z-index: -1;
+            @include back-center-cover; transition: transform 0.5s;
+        }
+        &::before{
+            content:''; display: block; position: absolute; width:100%; height:100%;
+            top:0; left:0; transition: all 0.25s;
+            background-color: rgba(0,0,0,0.0);
+        }
+        &:hover::before{
+            background-color: rgba(0,0,0,0.5);
+        }
+        &:hover .back-pict{
+            transform: scale(1.2);
+        }
+        .info-wrap {
+            position: absolute; width: 60%; height: 60%; 
+            margin: auto; 
+            transition: all 0.25s;
+            background-color: transparent; border: 1px solid white;
+            color: #fff;
+            .title {
+                width: 100%; font-size: 1.5vw; font-weight: 400; line-height: 1.2em;
+                text-align: center; margin-top: 5vw;
+            }
+        }
+        &.border-effect {
+            .info-wrap {
+                border: 1px solid transparent;
+                &::before, &::after{
+                    content:''; position: absolute;
+                }              
+                .title {
+                    transition: opacity 0.25s;
+                    opacity: 0;
+                }
+            }
+        }
+        &.ltr{
+            .info-wrap{
+                top:0; bottom:0; left:-100%;
+            }
+        }
+        &.ltr:hover{
+            .info-wrap{
+                left:0; right:0;
+            }
+        }
+        &.rtl{
+            .info-wrap{
+                top:0; bottom:0; right:-100%;
+            }
+        }
+        &.rtl:hover{
+            .info-wrap{
+                left:0; right:0;
+            }
+        }
+        &.ttb{
+            .info-wrap{
+                top:-100%; left:0; right:0;
+            }
+        }
+        &.ttb:hover{
+            .info-wrap{
+                top:0; bottom:0; 
+            }
+        }
+        &.btt{
+            .info-wrap{
+                bottom:-100%; left:0; right:0;
+            }
+        }
+        &.btt:hover{
+            .info-wrap{
+                top:0; bottom:0; 
+            }
+        }
+    }
+}
+
+.border-draw {
+
+    .info-wrap{
+        transition: border 0.25s;
+        top:0; bottom:0; left:0; right:0;
+
+        &::before, &::after {
+            
+            border: 1px solid transparent;
+            width: 0; height: 0;
+        }    
+        &::before {
+            top: 0; left: 0;
+        }    
+        &::after {
+            bottom: 0; right: 0;
+        }
+    }
+    &:hover .info-wrap {    
+        &::before, &::after {
+            width: 100%; height: 100%;
+        }
+
+        &::before {
+            border-top-color: #fff; 
+            border-right-color: #fff;
+            transition:
+            width 0.25s ease-out, // 너비값 먼저 확장
+            height 0.25s ease-out 0.25s; // 그리고 높이값 확장
+        }
+
+        &::after {
+            border-bottom-color: #fff; // Make borders visible
+            border-left-color: #fff;
+            transition:
+            border-color 0s ease-out 0.5s, // Wait for ::before to finish before showing border
+            width 0.25s ease-out 0.5s, // And then exanding width
+            height 0.25s ease-out 0.75s; // And finally height
+        }
+        .title {
+            opacity: 1.0 !important;
+        }
+    }
+    &.meet{
+        .info-wrap::after {
+            top: 0; left: 0;
+          }
+        &:hover .info-wrap{
+            &::before {
+            border-top-color: #fff;
+            border-right-color: #fff;
+            }
+        
+            &::after {
+            border-bottom-color: #fff;
+            border-left-color: #fff;
+            transition:
+                height 0.25s ease-out,
+                width 0.25s ease-out 0.25s;
+            }
+        }
+    }  
+}
+
+.border-center {
+    .info-wrap{
+        transition: border 0.25s;
+        top: 50%; left:50%;
+        transform: translate(-50%, -50%);
+
+        &::before,
+        &::after {                      
+            top:0; left:0;
+            height: 100%; width: 100%;
+            transform-origin: center; 
+        }
+
+        &::before {
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            transform: scale(0,1); // 너비값만 줄어든다
+        }
+    
+        &::after {
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
+            transform: scale(1,0); // 높이값만 줄어든다
+        }    
+        
+    }
+    &:hover .info-wrap{
+        &::before,
+        &::after {
+            transform: scale(1,1); // 전체 크기를 보여준다
+            transition: transform 0.5s;
+        }
+        .title {
+            opacity: 1.0 !important;
+        }
+    }
+}

@@ -1,0 +1,122 @@
+@charset "utf-8";
+
+@import url("../../fonts/poppins/stylesheet.css");
+
+@import "../../css/globals/_reset.scss";
+@import "_type_1_1_vars.scss";
+@import "../../css/bootstrap-grid.scss";
+@import "../../css/patterns/_cards_1_1.scss";
+@import "./webgl_drag_slider.scss";
+
+body { font-family: "poppins"; overflow-x: hidden; }
+//--------------------------------------
+@mixin back-center-cover{
+    background-position: center center;
+    background-size: cover;
+}
+//--------------------------------------
+$ease-cb: cubic-bezier(.19,1,.22,1);
+
+@mixin nth-trans-delay($delay_items: 7, $delay_time: 0.2s){
+    @for $i from 1 through $delay_items {
+        &:nth-child(#{$i}) {   
+            transition-delay: $delay_time * $i; 
+        }
+    }
+}
+@mixin nth-ani-delay($delay_items: 7, $delay_time: 0.2s){
+    @for $i from 1 through $delay_items {
+      &:nth-child(#{$i}) {   
+       animation-delay: $delay_time * $i; 
+      }
+     }
+    }
+    @keyframes letter-glow{
+        0%   { opacity: 0; text-shadow: 0px 0px 1px rgba(255,255,255,0.1)}
+        66%  { opacity: 1; text-shadow: 0px 0px 20px rgba(255,255,255,0.9) }
+        77%   { opacity: 1;  }
+        90% { opacity:0.7; text-shadow: 0px 0px 20px rgba(255,255,255,0.0)}
+        100% { opacity:1; text-shadow: 0px 0px 20px rgba(255,255,255,0.0)}
+      }
+//--------------------------------------
+
+.hero-wrap {
+    width: 100%; height: calc(100vh - 80px);
+    background-color: gray;
+    background-image:url("../img/design_scene_1.png");
+    @include back-center-cover();
+    .title-wrap {
+        position: absolute; width: 50%; 
+        color:#fff; top: 20%; left: 10%;
+        h1{
+            font-size: 6vw; font-weight: 800;
+            span{
+                animation: letter-glow 0.7s 0s ease both;
+                @include nth-ani-delay(25, 0.05s);                
+            }
+        }
+    }
+}
+//--------------------------------------
+.trigger-1{
+    display: block; position: absolute; width: 20px; height: 1px;
+    top: 20vh; 
+}
+.block-1-wrap{
+    position:relative; width: 100%; padding-top: 20vh; padding-bottom: 10vh; transition: all 1s;
+    .module-wrap{
+        position: relative; width: 60%; min-height: 70vh; margin-bottom: 15vh;
+        &:last-child{
+            margin-bottom:0;
+        }
+        &.right {
+            margin-left: 40%;
+            .img-wrap {
+                right:5vw; transform-origin: center right;
+            }
+        }
+        &.left {
+            margin-right: 40%;
+            .img-wrap {
+                left:5vw; transform-origin: center left;
+            }
+            .module-title {
+                right:0;
+            }
+        }
+        .img-wrap{
+            position: absolute; width: 0%; height: 60vh; overflow: hidden;
+            object-fit: cover; object-position: center center; z-index: 1;
+            transition: all 1s;
+            &.active {
+                width: 70%;
+            }          
+        }
+        
+        .module-title{
+            position: absolute; width: 40%; top: 20vh; z-index: 2;
+            color:$color-display-base;
+            h2{
+                font-size: 4rem; font-weight: 800;
+            }
+            p{
+                font-size: 1.5rem; margin-top: 2rem;
+            }
+        }
+    }
+}
+
+.cards-wrap{
+    margin: 8rem 0 8rem 0;
+}
+.cards-wrap-1{
+    overflow: hidden;
+    .card-overlay {
+        transition: all 0.3s;
+    }
+}
+.drag-slider-wrap {
+    position: relative; width: 100%; height: 100vh; overflow: hidden;
+    background-color:black;
+}
+

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Template-2019</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
+    <link href="./css/type_1_1.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrap">
+        <section class="hero-wrap">
+            <div class="title-wrap">
+                <h1 class="js-spanize">Headline Sample</h1>
+                <p></p>
+            </div>
+        </section>
+        <section class="block-1-wrap">
+            <span class="trigger-1"></span>
+            <div class="module-wrap right">
+                <img src="./img/design_scene_1.png" class="img-wrap">
+                <div class="module-title">
+                    <h2>Module Sample title</h2>
+                    <p>Make all paths to external files absolute. Absolute ones have full path from the system's root.</p>
+                </div>
+            </div>
+            <div class="module-wrap left">
+                <img src="./img/design_scene_1.png" class="img-wrap">
+                <div class="module-title">
+                    <h2>Module Sample title</h2>
+                    <p>Make all paths to external files absolute. Absolute ones have full path from the system's root.</p>
+                </div>
+            </div>
+            <div class="module-wrap right">
+                <img src="./img/design_scene_1.png" class="img-wrap">
+                <div class="module-title">
+                    <h2>Module Sample title</h2>
+                    <p>Make all paths to external files absolute. Absolute ones have full path from the system's root.</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="container cards-wrap-1">
+            <div class="row cards-wrap">                
+                <div class="card-overlay col-4">
+                    <div class="thumb-wrap ratio2x3" style="background:black"></div>
+                    <div class="text-block">
+                        <p class="title">Card Headline title</p>
+                        <p class="detail">11111</p>
+                    </div>
+                </div>
+                <div class="card-overlay col-4" >
+                    <div class="thumb-wrap ratio2x3" style="background:black"></div>
+                    <div class="text-block">
+                        <p class="title">Card Headline title</p>
+                        <p class="detail">11111</p>
+                    </div>
+                </div>
+                <div class="card-overlay col-4" >
+                    <div class="thumb-wrap ratio2x3" style="background:black"></div>
+                    <div class="text-block">
+                        <p class="title">Card Headline title</p>
+                        <p class="detail">11111</p>
+                    </div>
+                </div>                         
+            </div>
+        </div>
+
+        <!-- WebGL drag slider -->
+
+        <!-- div that will hold our WebGL canvas -->
+        <div class="drag-slider-wrap">
+<div id="canvas"></div>
+
+<div id="content">
+
+    <!-- drag slider -->
+    <div id="planes">
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Hong Kong</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Chicago</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Shanghai</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">New York</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Tokyo</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Singapore</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Toronto</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+        <div class="plane-wrapper">
+            <span class="plane-title">Kuala Lumpur</span>
+            <div class="plane">
+                <img src="./img/design_scene_1.png" data-sampler="planeTexture" crossorigin />
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+       
+    </div>
+
+    <script id="slider-planes-vs" type="x-shader/x-vertex">
+        #ifdef GL_ES
+        precision mediump float;
+        #endif
+    
+        attribute vec3 aVertexPosition;
+        attribute vec2 aTextureCoord;
+    
+        uniform mat4 uMVMatrix;
+        uniform mat4 uPMatrix;
+    
+        uniform mat4 planeTextureMatrix;
+    
+        varying vec2 vTextureCoord;
+    
+        void main() {
+            gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+            vTextureCoord = (planeTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy;
+        }
+    </script>
+    <script id="slider-planes-fs" type="x-shader/x-fragment">
+        #ifdef GL_ES
+        precision mediump float;
+        #endif
+    
+        varying vec2 vTextureCoord;
+        uniform sampler2D planeTexture;
+        uniform float uOpacity;
+    
+        void main( void ) {
+            vec4 finalColor = texture2D(planeTexture, vTextureCoord);
+            float distanceToTop = distance(vec2(vTextureCoord.x, 1.0), vTextureCoord);
+            float spreadFromTop = clamp((uOpacity * (1.0 - distanceToTop) - 1.0) + uOpacity * 2.0, 0.0, 1.0);
+            finalColor = vec4(vec3(finalColor.rgb * spreadFromTop), spreadFromTop);
+            gl_FragColor = finalColor;
+        }
+    </script>
+    
+    
+    <script id="distortion-vs" type="x-shader/x-vertex">
+        #ifdef GL_ES
+        precision mediump float;
+        #endif
+    
+        attribute vec3 aVertexPosition;
+        attribute vec2 aTextureCoord;
+        uniform mat4 displacementTextureMatrix;
+    
+        uniform vec2 uMousePos;
+        uniform float uDirection;
+    
+        varying vec2 vTextureCoord;
+        varying vec2 vDispTextureCoord;
+        varying vec2 vMouseTexCoords;
+    
+        void main() {
+            gl_Position = vec4(aVertexPosition, 1.0);
+            vTextureCoord = aTextureCoord;
+            vDispTextureCoord = (displacementTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy;
+    
+            vec2 mouseHorizontalTexCoords = (uMousePos + 1.0) / 2.0;
+            mouseHorizontalTexCoords.y = 0.5;
+    
+            vec2 mouseVerticalTexCoords = (uMousePos + 1.0) / 2.0;
+            mouseVerticalTexCoords.x = 0.5;
+    
+            vMouseTexCoords = mix(mouseHorizontalTexCoords, mouseVerticalTexCoords, uDirection);
+        }
+    </script>
+    <script id="distortion-fs" type="x-shader/x-fragment">
+        #ifdef GL_ES
+        precision mediump float;
+        #endif
+    
+        varying vec2 vTextureCoord;
+        varying vec2 vDispTextureCoord;
+        varying vec2 vMouseTexCoords;
+    
+        uniform sampler2D renderTexture;
+        uniform sampler2D displacementTexture;
+        uniform float uDragEffect;
+        uniform vec2 uMousePos;
+        uniform vec2 uOffset;
+        uniform float uDirection;
+        uniform vec3 uBgColor;
+    
+        void main( void ) {
+            vec2 textureCoords = vTextureCoord;
+    
+            vec2 horizontalPhase = fract(vec2(vDispTextureCoord.x + uOffset.x, vDispTextureCoord.y + (uOffset.y / 3600.0)) / vec2(1.0, 1.0));
+            vec2 verticalPhase = fract(vec2(vDispTextureCoord.x * (uOffset.x / 3600.0), vDispTextureCoord.y + uOffset.y) / vec2(1.0, 1.0));
+    
+            vec2 phase = mix(horizontalPhase, verticalPhase, uDirection);
+            vec4 displacement = texture2D(displacementTexture, phase);
+    
+            vec2 mouseTexCoords = vMouseTexCoords;
+    
+            float distanceToMouse = distance(mouseTexCoords, textureCoords);
+    
+            float spreadFromMouse = clamp((uDragEffect * (1.0 - distanceToMouse) - 1.0) + uDragEffect * 2.0, 0.0, 1.0);
+    
+            vec2 fishEye = (vec2(textureCoords - mouseTexCoords).xy) * pow(distanceToMouse, 3.0);
+    
+            float displacementEffect = displacement.r * 1.25;
+    
+            vec2 horizontalTexCoords = textureCoords;
+            horizontalTexCoords.x -= spreadFromMouse * fishEye.x * displacementEffect / 2.0;
+            horizontalTexCoords.y += spreadFromMouse * fishEye.y * displacementEffect * 3.0;
+    
+            vec2 verticalTexCoords = textureCoords;
+            verticalTexCoords.x += spreadFromMouse * fishEye.x * displacementEffect * 3.0;
+            verticalTexCoords.y -= spreadFromMouse * fishEye.y * displacementEffect / 2.0;
+    
+            textureCoords = mix(horizontalTexCoords, verticalTexCoords, uDirection);
+    
+            vec4 finalColor = texture2D(renderTexture, textureCoords);
+            float grey = dot(finalColor.rgb, vec3(0.299, 0.587, 0.114));
+            vec4 finalGrey = vec4(vec3(grey), 1.0);
+    
+            finalColor = mix(finalColor, finalGrey, spreadFromMouse * finalColor.a);
+    
+            float spreadFromMouseAdjusted = spreadFromMouse / sqrt(2.0);
+    
+            finalColor = mix(vec4(uBgColor.r * spreadFromMouseAdjusted / 255.0, uBgColor.g * spreadFromMouseAdjusted / 255.0, uBgColor.b * spreadFromMouseAdjusted / 255.0, spreadFromMouseAdjusted), finalColor, finalColor.a);
+    
+            gl_FragColor = finalColor;
+        }
+    </script>
+    <script src="../js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+    <script src="../js/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="../js/scrollmagic/plugins/animation.gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <script src="../js/threejs/three.min.js"></script>
+    <script src="../js/curtains/curtains.min.js"></script>
+    <script src="./js/webgl_drag_slider.js"></script>
+
+    <script>
+        (function($) {
+            var s,
+            spanizeLetters = {
+                settings: {
+                letters: $('.js-spanize'),
+                },
+                init: function() {
+                s = this.settings;
+                this.bindEvents();
+                },
+                bindEvents: function(){
+                s.letters.html(function (i, el) {
+                    //spanizeLetters.joinChars();
+                    var spanizer = $.trim(el).split("");
+                    return '<span>' + spanizer.join('</span><span>') + '</span>';
+                });
+                },
+            };
+            spanizeLetters.init();
+            })(jQuery);
+    </script>
+    <script>
+        var controller = new ScrollMagic.Controller();
+        $('.img-wrap').each(function(){
+            var imgScene = new ScrollMagic.Scene({
+                triggerElement: this,
+                triggerHook:0.9
+            })
+            .setClassToggle(this,'active')
+            .addTo(controller);
+        });
+        new ScrollMagic.Scene({triggerElement:".trigger-1"})
+        .on("enter", function(){
+            $(".block-1-wrap").css({"background":"#ffe224"});
+        })
+        .on("leave", function(){
+            $(".block-1-wrap").css({"background":"white"});
+        })
+        .addTo(controller);
+
+        /*
+        new ScrollMagic.Scene({triggerElement:".cards-wrap-1"})
+        .on("enter", function(){
+            $(".card-overlay").css({"margin-top":"0rem"});
+        })
+        .addTo(controller);
+        
+        new ScrollMagic.Scene({triggerElement:".trigger-1", duration: 1000})
+            .on("enter", function(){
+                $(".img-wrap").css({"width":"70%"});
+                $(".block-1-wrap").css({"background":"yellow"});
+            })
+            .on("leave", function(){
+                $(".img-wrap").css({"width":"0%"});
+                $(".block-1-wrap").css({"background":"white"});
+            })
+            .addTo(controller);
+            */
+    </script>
+</body>
+</html>

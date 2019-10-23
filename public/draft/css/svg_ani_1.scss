@@ -1,0 +1,131 @@
+@charset "utf-8";
+
+@import url("../../fonts/poppins/stylesheet.css");
+
+@import "../../libs/scss/globals/_reset.scss";
+
+.block-wrap {
+    position: relative; width:calc(100vw - 6vh); height: 94vh; margin: 3vh auto; 
+    background-color:gray; overflow: hidden;
+    display: flex; flex-wrap: wrap;
+    .block {
+        width: 33.33333%; height: 50%; display: flex;
+        justify-content: center; align-items: center;
+        
+        &:nth-child(odd){
+            background-color:yellow;
+        }
+        &:nth-child(even){
+            background-color:orange;
+        }
+    }
+}
+#donut-icing {
+    fill: #FA9CB6;
+    transition: fill 2s ease-out;
+  }
+
+  #donut:hover {
+    cursor: pointer;
+    #donut-icing {
+        fill: #4a8af4;
+      }
+  }
+
+  //-------------------------
+
+  #smiley-love #smiley-blush {
+    display: none;
+  }
+  #smiley-love a {
+    display: inline-block;
+  }
+  #smiley-love a:hover #smiley {
+    transform: scale(1.1);
+    transform-origin: center;
+    -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+    animation: heartbeat 1.5s ease-in-out infinite both;
+  }
+  #smiley-love a:hover #smiley-blush {
+    display: inherit;
+  }
+  #smiley-love a:hover #smiley-eye-left {
+    transform-origin: center;
+    transform: scale(0.7) translate(-8px);
+  }
+  #smiley-love a:hover #smiley-eye-right {
+    transform-origin: center;
+    transform: scale(0.7) translate(8px);
+  }
+  #smiley-love a:hover #smiley-mouth {
+    transform: translateY(-22px) scale(1.6);
+    transform-origin: center;
+  }
+
+  @keyframes heartbeat {
+    from {
+      -webkit-transform: scale(1);
+      -webkit-transform-transform: scale(1);
+      -webkit-transform-origin: center center;
+      -webkit-transform-origin-transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+      -webkit-animation-timing-function-animation-timing-function: ease-out;
+    }
+    10% {
+      -webkit-transform: scale(0.91);
+      -webkit-transform-transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+      -webkit-animation-timing-function-animation-timing-function: ease-in;
+    }
+    17% {
+      -webkit-transform: scale(0.98);
+      -webkit-transform-transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+      -webkit-animation-timing-function-animation-timing-function: ease-out;
+    }
+    33% {
+      -webkit-transform: scale(0.87);
+      -webkit-transform-transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+      -webkit-animation-timing-function-animation-timing-function: ease-in;
+    }
+    45% {
+      -webkit-transform: scale(1);
+      -webkit-transform-transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+      -webkit-animation-timing-function-animation-timing-function: ease-out;
+    }
+  }
+  //----------------------------
+
+  #popsicle #drop-left {
+    animation: drop-left 3s ease-in-out infinite;
+  }
+  #popsicle #drop-right {
+    animation: drop-right 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes drop-left {
+    from {
+      transform: translate(30px, 239px);
+      opacity: 1;
+    }
+    to {
+      transform: translate(30px, 330px);
+      opacity: 0;
+    }
+  }
+  @keyframes drop-right {
+    from {
+      transform: translate(120px, 239px);
+      opacity: 1;
+    }
+    to {
+      transform: translate(120px, 360px);
+      opacity: 0;
+    }
+  }
+  
+
+  
+  

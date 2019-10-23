@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../libs/scss/app_common.css" />
     <link rel="stylesheet" type="text/css" href="./css/obj_sample.css" />
 </head>
 
@@ -26,14 +26,14 @@
         </section>
     </main>
 
-    <script src="../js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="../js/vendor/TweenMax.min.js"></script>
+    <script src="../libs/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../libs/gsap/TimelineMax.min.js"></script>
 
     <script type="module">
-			import * as THREE from '../js/vendor/three/build/three.module.js';
-			import { DDSLoader } from '../js/vendor/three/examples/jsm/loaders/DDSLoader.js';
-			import { MTLLoader } from '../js/vendor/three/examples/jsm/loaders/MTLLoader.js';
-			import { OBJLoader } from '../js/vendor/three/examples/jsm/loaders/OBJLoader.js';
+			import * as THREE from '../libs/threejs/three.module.js';
+			import { DDSLoader } from '../libs/threejs/jsm/loaders/DDSLoader.js';
+			import { MTLLoader } from '../libs/threejs/jsm/loaders/MTLLoader.js';
+			import { OBJLoader } from '../libs/threejs/jsm/loaders/OBJLoader.js';
 
 			var container;
 			var camera, scene, renderer, canvas, object;
